@@ -21,3 +21,8 @@
 ## 5. JavaScript Syntax & String Literal Integrity (Automated V8 Verification)
 - When generating or interpolating dynamic HTML within JavaScript strings, never embed unescaped nested quotes (e.g. `style="font-family: 'Space Grotesk'..."` inside single-quoted JS strings). Use CSS custom properties (e.g. `style="font-family: var(--font-price, sans-serif);"`) or standard utility classes.
 - Before staging and committing changes, all inline and external JavaScript blocks must be validated via an automated syntax parser (e.g. `node -c` or `new Function(script)`) to guarantee zero `SyntaxError` regressions that could break document-level event listeners.
+
+## 6. Mobile Viewport & Touch Resilience for Fixed Cart Elements
+- For mobile screens (`lg:hidden`), always provide direct header cart indicators (`#mobile-header-cart-btn`) alongside the hamburger menu, plus a menu item inside the drawer, because mobile users expect immediate top-bar access.
+- Any fixed action element must account for mobile browser UI and gesture bars using `bottom: max(24px, env(safe-area-inset-bottom, 24px))` and elevated stacking (`z-index: 99999`).
+- Drawers/modals must use `display: none` when closed to prevent invisible ghost overlays from blocking touch events on mobile.
