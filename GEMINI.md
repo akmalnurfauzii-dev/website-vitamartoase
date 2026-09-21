@@ -14,15 +14,16 @@
 - Position the watermark anchored high at the top boundary (`top-0 sm:top-1 right-1 sm:right-4`) with `z-index: 0` so it is not clipped by `overflow: hidden`.
 - Assign `relative z-10` to the foreground `SectionHeading` container to ensure foreground text is crisp, prominent, and never obstructed by background strokes.
 
-## 4. UI Restraint & Anti-Redundancy (Floating Action vs Header Navbar)
-- Do not duplicate primary cart or action buttons in the top navbar or header when a dedicated floating action button (FAB) already serves the purpose at the bottom-right of the screen.
-- Keep header navigation focused exclusively on essential section anchors and a single direct CTA (e.g., "Pesan Online"), preventing visual clutter and redundant UI triggers.
+## 4. UI Restraint & Anti-Redundancy (Single FAB at Bottom-Right Only)
+- The floating action button (FAB) at the bottom-right corner is the ONLY cart access point across ALL screen sizes (desktop, tablet, mobile).
+- NEVER place or duplicate cart buttons in the top navbar, header, or mobile drawer. Keep header navigation focused exclusively on navigation anchors and a single direct CTA.
 
 ## 5. JavaScript Syntax & String Literal Integrity (Automated V8 Verification)
-- When generating or interpolating dynamic HTML within JavaScript strings, never embed unescaped nested quotes (e.g. `style="font-family: 'Space Grotesk'..."` inside single-quoted JS strings). Use CSS custom properties (e.g. `style="font-family: var(--font-price, sans-serif);"`) or standard utility classes.
+- When generating or interpolating dynamic HTML within JavaScript strings, never embed unescaped nested quotes (e.g. `style="font-family: 'Space Grotesk'..."` inside single-quoted JS strings). Use CSS custom properties or standard utility classes.
 - Before staging and committing changes, all inline and external JavaScript blocks must be validated via an automated syntax parser (e.g. `node -c` or `new Function(script)`) to guarantee zero `SyntaxError` regressions that could break document-level event listeners.
 
-## 6. Mobile Viewport & Touch Resilience for Fixed Cart Elements
-- For mobile screens (`lg:hidden`), always provide direct header cart indicators (`#mobile-header-cart-btn`) alongside the hamburger menu, plus a menu item inside the drawer, because mobile users expect immediate top-bar access.
-- Any fixed action element must account for mobile browser UI and gesture bars using `bottom: max(24px, env(safe-area-inset-bottom, 24px))` and elevated stacking (`z-index: 99999`).
+## 6. Mobile Viewport & Anti-Zoomout Layout Shield
+- Set viewport meta tag to `<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">` to prevent mobile browsers from zooming out or scaling abnormally.
+- Marquees, tickers, and transformed elements (`w-max`, `-rotate-1`) MUST be strictly contained inside an outer container with `overflow: hidden !important; width: 100% !important; max-width: 100vw !important;` to eliminate any horizontal overflow that could expand the layout viewport.
+- Any fixed action element (such as the cart FAB) must account for mobile browser UI and gesture bars using `bottom: max(16px, env(safe-area-inset-bottom, 16px))` on mobile, `z-index: 99999`, and responsive sizing (`h-14 w-14 sm:h-16 sm:w-16`).
 - Drawers/modals must use `display: none` when closed to prevent invisible ghost overlays from blocking touch events on mobile.
