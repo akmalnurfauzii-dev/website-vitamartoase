@@ -2327,7 +2327,7 @@ video {
   animation-play-state: running;
 }
 .text-outline {
-        -webkit-text-stroke: 1.5px rgba(6, 78, 59, 0.18);
+        -webkit-text-stroke: 1.5px rgba(6, 78, 59, 0.28);
         color: transparent;
     }
 .text-outline-cream {
@@ -4165,42 +4165,84 @@ article[data-testid^="oase-menu-card-"]:hover {
   
 
   <!-- MOBILE NAVIGATION DRAWER (Garis 3 Interaktif) -->
-  <div id="mobile-menu-drawer" class="hidden lg:hidden fixed top-[64px] inset-x-0 z-50 border-t border-b border-brand/15 bg-cream/98 backdrop-blur-xl px-5 py-6 shadow-lift transition-all duration-300 max-h-[calc(100vh-64px)] overflow-y-auto">
-    <nav class="flex flex-col gap-2.5">
-      <button type="button" data-mobile-target="home" class="mobile-nav-btn min-h-[48px] w-full flex items-center justify-between py-3 px-4 rounded-xl font-bold text-ink hover:bg-mint-soft hover:text-brand text-left transition-colors cursor-pointer active:scale-98">
-        <span class="text-sm">Beranda</span>
-        <span class="text-xs text-mint">↑</span>
+  <!-- Backdrop Overlay -->
+  <div id="mobile-menu-backdrop" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-[58] transition-opacity duration-300" style="background-color: rgba(0, 0, 0, 0.6) !important;"></div>
+
+  <!-- Drawer Panel (100% Solid Cream Background, No Bleed Through) -->
+  <div id="mobile-menu-drawer" class="hidden lg:hidden fixed inset-x-0 z-[60] border-t border-b border-brand/20 px-5 py-6 shadow-2xl transition-all duration-300 overflow-y-auto" style="background-color: #FAF6F0 !important; background: #FAF6F0 !important; box-shadow: 0 25px 50px -12px rgba(6, 78, 59, 0.25) !important;">
+    
+    <!-- Store Status Pill -->
+    <div class="mb-4 flex items-center justify-between pb-3 border-b border-brand/10">
+      <div class="flex items-center gap-2">
+        <span class="relative flex h-2.5 w-2.5">
+          <span class="absolute inline-flex h-full w-full animate-ping rounded-full opacity-75 bg-emerald-400"></span>
+          <span class="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-500"></span>
+        </span>
+        <span class="text-xs font-bold text-brand" id="mobile-drawer-status">Buka Sekarang (09.00 - 24.00 WIB)</span>
+      </div>
+      <span class="text-[11px] font-semibold text-citrus px-2.5 py-0.5 rounded-full bg-citrus/10">Oase × Vitamart</span>
+    </div>
+
+    <!-- Navigation Buttons -->
+    <nav class="flex flex-col gap-2">
+      <button type="button" data-mobile-target="home" class="mobile-nav-btn min-h-[50px] w-full flex items-center justify-between py-3 px-4 rounded-2xl font-bold text-ink bg-white/80 border border-brand/10 hover:bg-mint-soft hover:text-brand text-left transition-all cursor-pointer active:scale-98 shadow-sm">
+        <span class="flex items-center gap-2.5 text-sm">
+          <span>🏠</span>
+          <span>Beranda</span>
+        </span>
+        <span class="text-xs font-bold text-mint">↑</span>
       </button>
-      <button type="button" data-mobile-target="oase-menu" class="mobile-nav-btn min-h-[48px] w-full flex items-center justify-between py-3 px-4 rounded-xl font-bold text-ink hover:bg-mint-soft hover:text-brand text-left transition-colors cursor-pointer active:scale-98">
-        <span class="text-sm">Menu Oase (Minuman)</span>
-        <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-mint-soft text-brand">30+ Menu</span>
+
+      <button type="button" data-mobile-target="oase-menu" class="mobile-nav-btn min-h-[50px] w-full flex items-center justify-between py-3 px-4 rounded-2xl font-bold text-ink bg-white/80 border border-brand/10 hover:bg-mint-soft hover:text-brand text-left transition-all cursor-pointer active:scale-98 shadow-sm">
+        <span class="flex items-center gap-2.5 text-sm">
+          <span>🧃</span>
+          <span>Menu Oase (Minuman)</span>
+        </span>
+        <span class="text-xs font-bold px-2.5 py-1 rounded-full bg-mint-soft text-brand">30+ Menu</span>
       </button>
-      <button type="button" data-mobile-target="vitamart-corner" class="mobile-nav-btn min-h-[48px] w-full flex items-center justify-between py-3 px-4 rounded-xl font-bold text-ink hover:bg-mint-soft hover:text-brand text-left transition-colors cursor-pointer active:scale-98">
-        <span class="text-sm">Vitamart Corner (Toko)</span>
-        <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-mint-soft text-brand">Minimarket</span>
+
+      <button type="button" data-mobile-target="vitamart-corner" class="mobile-nav-btn min-h-[50px] w-full flex items-center justify-between py-3 px-4 rounded-2xl font-bold text-ink bg-white/80 border border-brand/10 hover:bg-mint-soft hover:text-brand text-left transition-all cursor-pointer active:scale-98 shadow-sm">
+        <span class="flex items-center gap-2.5 text-sm">
+          <span>🏪</span>
+          <span>Vitamart Corner (Toko)</span>
+        </span>
+        <span class="text-xs font-bold px-2.5 py-1 rounded-full bg-mint-soft text-brand">Minimarket</span>
       </button>
-      <button type="button" data-mobile-target="delivery-hub" class="mobile-nav-btn min-h-[48px] w-full flex items-center justify-between py-3 px-4 rounded-xl font-bold text-ink hover:bg-mint-soft hover:text-brand text-left transition-colors cursor-pointer active:scale-98">
-        <span class="text-sm">Delivery Hub (Online)</span>
-        <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-mint-soft text-brand">Go · Grab · Shopee</span>
+
+      <button type="button" data-mobile-target="delivery-hub" class="mobile-nav-btn min-h-[50px] w-full flex items-center justify-between py-3 px-4 rounded-2xl font-bold text-ink bg-white/80 border border-brand/10 hover:bg-mint-soft hover:text-brand text-left transition-all cursor-pointer active:scale-98 shadow-sm">
+        <span class="flex items-center gap-2.5 text-sm">
+          <span>🛵</span>
+          <span>Delivery Hub (Online)</span>
+        </span>
+        <span class="text-xs font-bold px-2.5 py-1 rounded-full bg-mint-soft text-brand">Shopee · Go · Grab</span>
       </button>
-      <button type="button" data-mobile-target="lokasi" class="mobile-nav-btn min-h-[48px] w-full flex items-center justify-between py-3 px-4 rounded-xl font-bold text-ink hover:bg-mint-soft hover:text-brand text-left transition-colors cursor-pointer active:scale-98">
-        <span class="text-sm">Offline Store (Lokasi & Peta)</span>
-        <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-mint-soft text-brand">Buka s/d 24.00</span>
+
+      <button type="button" data-mobile-target="lokasi" class="mobile-nav-btn min-h-[50px] w-full flex items-center justify-between py-3 px-4 rounded-2xl font-bold text-ink bg-white/80 border border-brand/10 hover:bg-mint-soft hover:text-brand text-left transition-all cursor-pointer active:scale-98 shadow-sm">
+        <span class="flex items-center gap-2.5 text-sm">
+          <span>📍</span>
+          <span>Offline Store (Lokasi & Peta)</span>
+        </span>
+        <span class="text-xs font-bold px-2.5 py-1 rounded-full bg-mint-soft text-brand">Buka s/d 24.00</span>
       </button>
     </nav>
+
+    <!-- CTAs Inside Drawer -->
     <div class="mt-5 pt-4 border-t border-brand/10 flex flex-col gap-2.5">
-      <button type="button" data-mobile-target="oase-menu" class="mobile-nav-btn min-h-[48px] w-full inline-flex items-center justify-center gap-2 rounded-full bg-brand py-3 text-sm font-bold text-cream shadow-soft hover:bg-brand-dark active:scale-95 cursor-pointer">
+      <button type="button" data-mobile-target="oase-menu" class="mobile-nav-btn min-h-[48px] w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-brand py-3 text-sm font-extrabold text-cream shadow-md hover:bg-brand-dark active:scale-95 cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"></circle><circle cx="19" cy="21" r="1"></circle><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path></svg>
         Pesan Online Sekarang
       </button>
-      <a href="https://wa.me/6285729136261?text=Halo%20Oase%20%C3%97%20Vitamart!%20Mau%20tanya%20menu%20%2F%20stok%20barang%20yang%20tersedia%20kak%20%F0%9F%98%8A" target="_blank" rel="noopener noreferrer" class="min-h-[48px] w-full inline-flex items-center justify-center gap-2 rounded-full bg-mint py-3 text-sm font-bold text-brand-deep shadow-soft hover:bg-emerald-400 active:scale-95">
+      <a href="https://wa.me/6285729136261?text=Halo%20Oase%20%C3%97%20Vitamart!%20Mau%20tanya%20menu%20%2F%20stok%20barang%20yang%20tersedia%20kak%20%F0%9F%98%8A" target="_blank" rel="noopener noreferrer" class="min-h-[48px] w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-[#25D366] py-3 text-sm font-extrabold text-white shadow-md hover:bg-[#1fb358] active:scale-95">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
         Chat WhatsApp Toko
       </a>
     </div>
   </div>
+</div>
 </header>
 
 
-<main x-file-name="App" x-line-number="27" x-column="8" x-component="main" x-id="App_27_8" x-dynamic="false"><section id="home" data-testid="hero-section" class="relative overflow-hidden" x-file-name="Hero" x-line-number="45" x-column="4" x-component="section" x-id="Hero_45_4" x-dynamic="false"><span aria-hidden="true" class="pointer-events-none absolute -bottom-8 left-0 select-none font-display text-[22vw] font-extrabold leading-none text-outline" x-file-name="Hero" x-line-number="52" x-column="6" x-component="span" x-id="Hero_52_6" x-dynamic="false" style="transform: none;">OASE</span><div class="pointer-events-none absolute -top-32 -right-32 h-96 w-96 rounded-full bg-mint-light/60 blur-3xl" x-file-name="Hero" x-line-number="59" x-column="6" x-component="div" x-id="Hero_59_6" x-dynamic="false" bis_skin_checked="1"></div><div class="pointer-events-none absolute top-40 -left-40 h-80 w-80 rounded-full bg-citrus-light/50 blur-3xl" x-file-name="Hero" x-line-number="60" x-column="6" x-component="div" x-id="Hero_60_6" x-dynamic="false" bis_skin_checked="1"></div><div class="relative mx-auto grid max-w-7xl grid-cols-1 items-center gap-14 px-4 pb-24 pt-14 sm:px-6 sm:pt-20 lg:grid-cols-12 lg:gap-8 lg:px-12 lg:pb-32" x-file-name="Hero" x-line-number="62" x-column="6" x-component="div" x-id="Hero_62_6" x-dynamic="false" bis_skin_checked="1"><div class="lg:col-span-6" x-file-name="Hero" x-line-number="64" x-column="8" x-component="div" x-id="Hero_64_8" x-dynamic="false" bis_skin_checked="1"><div class="mb-7 flex flex-wrap items-center gap-3" x-file-name="Hero" x-line-number="65" x-column="10" x-component="div" x-id="Hero_65_10" x-dynamic="false" style="opacity: 1; transform: none;" bis_skin_checked="1"><div data-testid="topbar-status-badge" class="inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-bold bg-mint-soft text-brand border border-mint/30" x-file-name="Navbar" x-line-number="19" x-column="4" x-component="div" x-id="Navbar_19_4" x-dynamic="true" x-source-type="unknown" x-source-var="label" x-source-editable="false" bis_skin_checked="1"><span class="relative flex h-2 w-2" x-file-name="Navbar" x-line-number="27" x-column="6" x-component="span" x-id="Navbar_27_6" x-dynamic="false"><span class="absolute inline-flex h-full w-full animate-ping rounded-full opacity-60 bg-mint" x-file-name="Navbar" x-line-number="28" x-column="8" x-component="span" x-id="Navbar_28_8" x-dynamic="false"></span><span class="relative inline-flex h-2 w-2 rounded-full bg-mint" x-file-name="Navbar" x-line-number="33" x-column="8" x-component="span" x-id="Navbar_33_8" x-dynamic="false"></span></span>Buka Hari Ini<span class="hidden sm:inline font-medium opacity-70" x-file-name="Navbar" x-line-number="41" x-column="8" x-component="span" x-id="Navbar_41_8" x-dynamic="true" x-source-type="unknown" x-source-var="sublabel" x-source-editable="false">· <span data-ve-dynamic="true" x-excluded="true" x-file-name="Navbar" x-line-number="41" x-column="8" x-component="span" x-id="Navbar_41_8_expr1" x-dynamic="true" x-source-type="unknown" x-source-var="sublabel" x-source-editable="false" style="display: contents;">Sampai 24.00 WIB</span></span></div><span class="font-mono text-[11px] font-bold uppercase tracking-[0.3em] text-ink-soft" x-file-name="Hero" x-line-number="72" x-column="12" x-component="span" x-id="Hero_72_12" x-dynamic="false">Minimarket × Beverage Bar</span></div><h1 class="font-display text-4xl sm:text-5xl lg:text-[4.2rem] font-extrabold tracking-tight leading-[1.04]" x-file-name="Hero" x-line-number="77" x-column="10" x-component="h1" x-id="Hero_77_10" x-dynamic="false">
+<main x-file-name="App" x-line-number="27" x-column="8" x-component="main" x-id="App_27_8" x-dynamic="false"><section id="home" data-testid="hero-section" class="relative overflow-hidden" x-file-name="Hero" x-line-number="45" x-column="4" x-component="section" x-id="Hero_45_4" x-dynamic="false"><span aria-hidden="true" class="pointer-events-none absolute bottom-6 sm:bottom-2 left-2 sm:left-6 select-none font-display text-[19vw] sm:text-[21vw] font-extrabold leading-none text-outline" x-file-name="Hero" x-line-number="52" x-column="6" x-component="span" x-id="Hero_52_6" x-dynamic="false" style="transform: none; -webkit-text-stroke: 1.5px rgba(6, 78, 59, 0.28); color: transparent; z-index: 1;">OASE</span><div class="pointer-events-none absolute -top-32 -right-32 h-96 w-96 rounded-full bg-mint-light/60 blur-3xl" x-file-name="Hero" x-line-number="59" x-column="6" x-component="div" x-id="Hero_59_6" x-dynamic="false" bis_skin_checked="1"></div><div class="pointer-events-none absolute top-40 -left-40 h-80 w-80 rounded-full bg-citrus-light/50 blur-3xl" x-file-name="Hero" x-line-number="60" x-column="6" x-component="div" x-id="Hero_60_6" x-dynamic="false" bis_skin_checked="1"></div><div class="relative mx-auto grid max-w-7xl grid-cols-1 items-center gap-14 px-4 pb-24 pt-14 sm:px-6 sm:pt-20 lg:grid-cols-12 lg:gap-8 lg:px-12 lg:pb-32" x-file-name="Hero" x-line-number="62" x-column="6" x-component="div" x-id="Hero_62_6" x-dynamic="false" bis_skin_checked="1"><div class="lg:col-span-6" x-file-name="Hero" x-line-number="64" x-column="8" x-component="div" x-id="Hero_64_8" x-dynamic="false" bis_skin_checked="1"><div class="mb-7 flex flex-wrap items-center gap-3" x-file-name="Hero" x-line-number="65" x-column="10" x-component="div" x-id="Hero_65_10" x-dynamic="false" style="opacity: 1; transform: none;" bis_skin_checked="1"><div data-testid="topbar-status-badge" class="inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-bold bg-mint-soft text-brand border border-mint/30" x-file-name="Navbar" x-line-number="19" x-column="4" x-component="div" x-id="Navbar_19_4" x-dynamic="true" x-source-type="unknown" x-source-var="label" x-source-editable="false" bis_skin_checked="1"><span class="relative flex h-2 w-2" x-file-name="Navbar" x-line-number="27" x-column="6" x-component="span" x-id="Navbar_27_6" x-dynamic="false"><span class="absolute inline-flex h-full w-full animate-ping rounded-full opacity-60 bg-mint" x-file-name="Navbar" x-line-number="28" x-column="8" x-component="span" x-id="Navbar_28_8" x-dynamic="false"></span><span class="relative inline-flex h-2 w-2 rounded-full bg-mint" x-file-name="Navbar" x-line-number="33" x-column="8" x-component="span" x-id="Navbar_33_8" x-dynamic="false"></span></span>Buka Hari Ini<span class="hidden sm:inline font-medium opacity-70" x-file-name="Navbar" x-line-number="41" x-column="8" x-component="span" x-id="Navbar_41_8" x-dynamic="true" x-source-type="unknown" x-source-var="sublabel" x-source-editable="false">· <span data-ve-dynamic="true" x-excluded="true" x-file-name="Navbar" x-line-number="41" x-column="8" x-component="span" x-id="Navbar_41_8_expr1" x-dynamic="true" x-source-type="unknown" x-source-var="sublabel" x-source-editable="false" style="display: contents;">Sampai 24.00 WIB</span></span></div><span class="font-mono text-[11px] font-bold uppercase tracking-[0.3em] text-ink-soft" x-file-name="Hero" x-line-number="72" x-column="12" x-component="span" x-id="Hero_72_12" x-dynamic="false">Minimarket × Beverage Bar</span></div><h1 class="font-display text-4xl sm:text-5xl lg:text-[4.2rem] font-extrabold tracking-tight leading-[1.04]" x-file-name="Hero" x-line-number="77" x-column="10" x-component="h1" x-id="Hero_77_10" x-dynamic="false">
   <span class="block overflow-hidden pb-1"><span class="block origin-left hero-gradient-1">Belanja lengkap,</span></span>
   <span class="block overflow-hidden pb-1"><span class="block origin-left hero-gradient-2">jajan <em class="not-italic hero-gradient-accent">segar</em>,</span></span>
   <span class="block overflow-hidden pb-2"><span class="block origin-left hero-gradient-3">satu tempat aja.</span></span>
