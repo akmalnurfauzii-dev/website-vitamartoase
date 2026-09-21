@@ -1,0 +1,5 @@
+# Dependencies & temporary files
+.agents/
+*.tmp
+.DS_Store
+Thumbs.db
