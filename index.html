@@ -4174,6 +4174,76 @@ html, body {
     right: 16px !important;
   }
 }
+
+/* ==========================================================================
+   MOBILE BEVERAGE BAR CATEGORY FILTER (ONLY FOR MOBILE <= 768px)
+   Ultra Clean Swipeable Chips (GoFood / Modern App Aesthetic)
+   ========================================================================== */
+@media (max-width: 768px) {
+  div[role="tablist"] {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important; /* Firefox */
+    -ms-overflow-style: none !important;  /* IE/Edge */
+    width: 100% !important;
+    max-width: 100% !important;
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    padding: 4px 4px 12px 2px !important;
+    gap: 8px !important;
+    margin-bottom: 1.25rem !important;
+  }
+
+  div[role="tablist"]::-webkit-scrollbar {
+    display: none !important; /* Webkit / Chrome / Safari / Edge */
+    width: 0 !important;
+    height: 0 !important;
+  }
+
+  div[role="tablist"] button {
+    flex-shrink: 0 !important;
+    white-space: nowrap !important;
+    padding: 8px 18px !important;
+    font-size: 0.84rem !important;
+    font-weight: 700 !important;
+    border-radius: 9999px !important;
+    font-family: var(--font-heading), 'Outfit', sans-serif !important;
+    box-shadow: 0 2px 6px -1px rgba(6, 78, 59, 0.08) !important;
+    background-color: #FFFFFF !important;
+    border: 1.5px solid rgba(6, 78, 59, 0.14) !important;
+    color: #064E3B !important;
+    transition: all 0.2s ease !important;
+    cursor: pointer !important;
+  }
+
+  div[role="tablist"] button[aria-selected="true"] {
+    background-color: #064E3B !important;
+    border-color: #064E3B !important;
+    color: #FAF6F0 !important;
+    box-shadow: 0 4px 14px -2px rgba(6, 78, 59, 0.35) !important;
+  }
+
+  div[role="tablist"] button[aria-selected="true"] span.bg-brand {
+    display: none !important;
+  }
+
+  div[role="tablist"] button[aria-selected="true"] .relative.z-10 {
+    color: #FAF6F0 !important;
+  }
+
+  div[role="tablist"] button[aria-selected="false"] .relative.z-10 {
+    color: #064E3B !important;
+  }
+
+  div[role="tablist"] button:active {
+    transform: scale(0.96) !important;
+  }
+}
 </style>
 </head>
     <body __processed_af729d85-a563-4f6e-b4ae-7655a9fe6fda__="true" bis_register="W3sibWFzdGVyIjp0cnVlLCJleHRlbnNpb25JZCI6ImVwcGlvY2VtaG1ubGJoanBsY2drb2ZjaWllZ29tY29uIiwiYWRibG9ja2VyU3RhdHVzIjp7IkRJU1BMQVkiOiJlbmFibGVkIiwiRkFDRUJPT0siOiJlbmFibGVkIiwiVFdJVFRFUiI6ImVuYWJsZWQiLCJSRURESVQiOiJlbmFibGVkIiwiUElOVEVSRVNUIjoiZW5hYmxlZCIsIklOU1RBR1JBTSI6ImVuYWJsZWQiLCJUSUtUT0siOiJlbmFibGVkIiwiTElOS0VESU4iOiJlbmFibGVkIiwiQ09ORklHIjoiZGlzYWJsZWQifSwidmVyc2lvbiI6IjIuMy4wIiwic2NvcmUiOjIwMzAwMH1d">
@@ -4747,6 +4817,13 @@ document.addEventListener('DOMContentLoaded', function() {
       const spanBg = document.createElement('span');
       spanBg.className = 'absolute inset-0 rounded-full bg-brand shadow-soft';
       this.insertBefore(spanBg, this.firstChild);
+
+      // Auto-scroll active tab into view on mobile
+      try {
+        if (window.innerWidth <= 768) {
+          this.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        }
+      } catch (err) {}
 
       renderMenu();
     });
