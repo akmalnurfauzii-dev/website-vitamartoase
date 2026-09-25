@@ -3,16 +3,16 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://vitamartoase.biz.id/</loc>
-    <lastmod>2026-09-24</lastmod>
+    <lastmod>2026-09-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
       <image:loc>https://vitamartoase.biz.id/logo.png</image:loc>
-      <image:title>Logo Oase x Vitamart</image:title>
+      <image:title>Logo Kedai Vitamart &amp; Oase</image:title>
     </image:image>
     <image:image>
       <image:loc>https://vitamartoase.biz.id/foto-kelapa.jpg</image:loc>
-      <image:title>Es Kelapa Muda Segar Oase x Vitamart</image:title>
+      <image:title>Es Kelapa Muda Segar Kedai Vitamart &amp; Oase</image:title>
     </image:image>
   </url>
 </urlset>

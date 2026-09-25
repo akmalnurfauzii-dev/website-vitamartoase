@@ -27,3 +27,12 @@
 - Marquees, tickers, and transformed elements (`w-max`, `-rotate-1`) MUST be strictly contained inside an outer container with `overflow: hidden !important; width: 100% !important; max-width: 100vw !important;` to eliminate any horizontal overflow that could expand the layout viewport.
 - Any fixed action element (such as the cart FAB) must account for mobile browser UI and gesture bars using `bottom: max(16px, env(safe-area-inset-bottom, 16px))` on mobile, `z-index: 99999`, and responsive sizing (`h-14 w-14 sm:h-16 sm:w-16`).
 - Drawers/modals must use `display: none` when closed to prevent invisible ghost overlays from blocking touch events on mobile.
+
+## 7. Dual-Brand Local SEO Alignment & Entity Preservation
+- **Primary Physical Entity in Title:** For businesses with dual branding (e.g., physical store "Kedai Vitamart" + brand concept "Oase"), NEVER omit the primary physical/Google Business Profile entity name from high-weight SEO tags.
+- **Front-Loaded Exact Match:** Always front-load the physical store keyword in the `<title>` tag:  
+  `Kedai Vitamart (Oase x Vitamart) | [Services / Highlights]`.
+- **Meta Description & Keywords:** Both the physical store name (`Kedai Vitamart`) and collaborative name (`Oase x Vitamart`) must appear in `<meta name="description">` and `<meta name="keywords">`.
+- **Schema.org Entity Bridging:** In `LocalBusiness` JSON-LD, set the primary `"name"` to match the Google Business Profile (`Kedai Vitamart`), and use `"alternateName"` to list all collaborative variations (`["Kedai Vitamart & Oase", "Oase x Vitamart", "Kedai Vitamart Oase"]`).
+- **Zero Visual Regression:** All SEO metadata enhancements must reside purely in `<head>` or existing structured elements without disrupting visual layout or UI components in `<body>`.
+
