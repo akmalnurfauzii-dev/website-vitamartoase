@@ -307,27 +307,21 @@ html, body {
   0% { transform: scaleY(0.35); }
   100% { transform: scaleY(1); }
 }
-.clue-text {
-  font-size: 0.71rem;
-  font-weight: 700;
-  color: #c2410c;
-  margin-top: 5px;
-}
 .options-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 9px;
-  margin: 7px 0;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 8px 0;
   flex: 1;
   min-height: 0;
 }
 .option-card {
   background: #f8fafc;
-  border: 2.5px solid #e2e8f0;
+  border: 3px solid #e2e8f0;
   border-radius: 16px;
-  padding: 5px;
+  padding: 4px;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   cursor: pointer;
@@ -343,24 +337,10 @@ html, body {
 .option-card img {
   width: 100%;
   height: 100%;
-  max-height: 104px;
   object-fit: cover;
   border-radius: 11px;
   background: #e2e8f0;
-  flex: 1;
-  min-height: 0;
-}
-.option-card .name {
-  font-size: 0.73rem;
-  font-weight: 800;
-  color: #1e293b;
-  margin-top: 4px;
-  text-align: center;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  width: 100%;
-  flex-shrink: 0;
+  display: block;
 }
 .option-card.correct {
   border-color: #16a34a !important;
@@ -430,7 +410,7 @@ html, body {
       <span class="new-badge">&#x1F525; 10 RONDE SUARA ASLI!</span>
       <div class="start-cat-icon">&#x1F431;</div>
       <h1 class="start-title">Kuis Suara Kucing Meme</h1>
-      <p class="start-desc">Dengarkan suaranya (otomatis berputar di tiap ronde) lalu tebak kucing meme mana yang cocok! Lengkap dengan <strong>Wiwiwi Kitten</strong>, <strong>Sad Meow Song</strong> &amp; <strong>Crunchy Cat Luna</strong>!</p>
+      <p class="start-desc">Dengarkan suaranya (otomatis berputar di tiap ronde), perhatikan ekspresi &amp; gerakan kucingnya, lalu tebak kucing meme mana yang cocok!</p>
       <div class="start-pills">
         <span class="pill">&#x1F50A; 10 Suara Meme Asli</span>
         <span class="pill">&#x26A1; Animasi Sinkron</span>
@@ -465,7 +445,6 @@ html, body {
             <span class="eq-bar"></span>
           </span>
         </button>
-        <div class="clue-text" id="round-clue">&#x1F4A1; Petunjuk: Kucing berputar cepat!</div>
       </div>
 
       <div class="options-grid" id="options-grid"></div>
@@ -532,66 +511,16 @@ const CATS = {
 // 10 Playable Rounds — Strict Non-Repetition Rule (Rule 8):
 // Once a cat is the correct answer in Round N, it NEVER appears again in Rounds N+1..10!
 const ROUNDS = [
-  {
-    sound: "oiia",
-    correct: "oiia",
-    options: ["oiia", "wiwiwi", "huh", "side_eye"],
-    clue: "Kucing abu-abu berputar super cepat: U-i-i-a-i-o!"
-  },
-  {
-    sound: "wiwiwi",
-    correct: "wiwiwi",
-    options: ["wiwiwi", "sad_meow", "banana", "shocked"],
-    clue: "Anak kucing mungil di mangkuk makan sambil bersuara: Wi-wi-wi ~ Om nom nom!"
-  },
-  {
-    sound: "sad_meow",
-    correct: "sad_meow",
-    options: ["sad_meow", "crunchy", "happy", "beluga"],
-    clue: "Kucing mata berkaca-kaca bernyanyi sedih: Meow meow meow meow..."
-  },
-  {
-    sound: "huh",
-    correct: "huh",
-    options: ["huh", "maxwell", "pop", "angry"],
-    clue: "Kucing oren bingung mengangguk: HAAAH?! HUH?!"
-  },
-  {
-    sound: "crunchy",
-    correct: "crunchy",
-    options: ["crunchy", "chipi", "silly", "side_eye"],
-    clue: "Kucing mengunyah makanan kering super renyah: Krauk krauk cronch!"
-  },
-  {
-    sound: "happy",
-    correct: "happy",
-    options: ["happy", "banana", "el_gato", "shocked"],
-    clue: "Kucing lompat-lompat senang: Happy Happy Happy! (Tepuk tangan)"
-  },
-  {
-    sound: "banana",
-    correct: "banana",
-    options: ["banana", "maxwell", "beluga", "angry"],
-    clue: "Kucing berkostum pisang menangis banjir air mata: Huuuu huuuu!"
-  },
-  {
-    sound: "maxwell",
-    correct: "maxwell",
-    options: ["maxwell", "pop", "chipi", "silly"],
-    clue: "Kucing tuxedo hitam-putih goyang 3D dengan musik retro ikonik!"
-  },
-  {
-    sound: "pop",
-    correct: "pop",
-    options: ["pop", "el_gato", "side_eye", "shocked"],
-    clue: "Mulut kucing membuka-tutup cepat: POP POP POP POP!"
-  },
-  {
-    sound: "chipi",
-    correct: "chipi",
-    options: ["chipi", "beluga", "angry", "silly"],
-    clue: "Kucing goyang kepala heboh: Chipi chipi chapa chapa dubi dubi!"
-  }
+  { sound: "oiia",     correct: "oiia",     options: ["oiia", "wiwiwi", "huh", "side_eye"] },
+  { sound: "wiwiwi",   correct: "wiwiwi",   options: ["wiwiwi", "sad_meow", "banana", "shocked"] },
+  { sound: "sad_meow", correct: "sad_meow", options: ["sad_meow", "crunchy", "happy", "beluga"] },
+  { sound: "huh",      correct: "huh",      options: ["huh", "maxwell", "pop", "angry"] },
+  { sound: "crunchy",  correct: "crunchy",  options: ["crunchy", "chipi", "silly", "side_eye"] },
+  { sound: "happy",    correct: "happy",    options: ["happy", "banana", "el_gato", "shocked"] },
+  { sound: "banana",   correct: "banana",   options: ["banana", "maxwell", "beluga", "angry"] },
+  { sound: "maxwell",  correct: "maxwell",  options: ["maxwell", "pop", "chipi", "silly"] },
+  { sound: "pop",      correct: "pop",      options: ["pop", "el_gato", "side_eye", "shocked"] },
+  { sound: "chipi",    correct: "chipi",    options: ["chipi", "beluga", "angry", "silly"] }
 ];
 
 let currentRound = 0;
@@ -620,11 +549,6 @@ function loadRound() {
   const pct = ((currentRound + 1) / ROUNDS.length) * 100;
   document.getElementById('progress').style.width = pct + '%';
   document.getElementById('round-text').textContent = 'Ronde ' + (currentRound + 1) + '/' + ROUNDS.length;
-  
-  const clueEl = document.getElementById('round-clue');
-  if (clueEl && round.clue) {
-    clueEl.innerHTML = '&#x1F4A1; Petunjuk: ' + round.clue;
-  }
 
   const streakEl = document.getElementById('streak-badge');
   if (streakEl) {
@@ -652,7 +576,7 @@ function loadRound() {
     const cat = CATS[catKey];
     const card = document.createElement('div');
     card.className = 'option-card';
-    card.innerHTML = '<img src="' + cat.img + '" alt="' + cat.name + '"><div class="name">' + cat.name + '</div>';
+    card.innerHTML = '<img src="' + cat.img + '" alt="Kucing Meme">';
     card.onclick = function() { selectAnswer(catKey, card); };
     grid.appendChild(card);
   });
