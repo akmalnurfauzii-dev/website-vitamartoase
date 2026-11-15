@@ -1,5 +1,6 @@
 # Dependencies & temporary files
 .agents/
+.wrangler/
 *.tmp
 .DS_Store
 Thumbs.db
