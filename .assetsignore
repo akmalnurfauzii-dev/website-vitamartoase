@@ -1,0 +1,12 @@
+.assetsignore
+.gitignore
+.git
+.agents
+.wrangler
+wrangler.jsonc
+worker.js
+GEMINI.md
+ORIGINAL_REQUEST.md
+README.md
+*.md
+*.jsonc

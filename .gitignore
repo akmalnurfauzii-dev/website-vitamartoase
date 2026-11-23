@@ -1,6 +1,10 @@
-# Dependencies & temporary files
+# Dependencies, internal instructions & temporary files
 .agents/
 .wrangler/
+GEMINI.md
+ORIGINAL_REQUEST.md
+worker.js
 *.tmp
 .DS_Store
 Thumbs.db
+
